@@ -3,11 +3,11 @@
 
 #include <QMainWindow>
 #include <QTextCodec>
-#include "plotdialog.h"
+#include "plotwidget.h"
 #include "signalparamsdialog.h"
 #include "../logic/experiment.h"
 
-class PlotDialog;
+class PlotWidget;
 class MainWindow;
 
 namespace Ui {
@@ -28,8 +28,8 @@ private:
     Ui::PlotWindow *ui;
     ExperimentType type;
     SignalParamsDialog *paramsDialog;
-    PlotDialog *plot;
-    PlotDialog *plot2;
+    PlotWidget *plot;
+    PlotWidget *plot2;
 
 
 private slots:

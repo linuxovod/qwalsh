@@ -1,20 +1,22 @@
 #include <QVBoxLayout>
+#include <QPen>
+#include <QRegExp>
+#include <QLayout>
+#include <QStatusBar>
+#include <QPrinter>
+#include <QPicture>
+#include <QPainter>
+#include <QFileDialog>
+#include <QImageWriter>
+#include <QPrintDialog>
+#include <QFileInfo>
+#include <QPushButton>
+#include <QRectF>
+
 #include <qwt_plot.h>
 #include <qwt_plot_curve.h>
 #include <qwt_legend.h>
 #include <qwt_plot_grid.h>
-#include <qpen.h>
-#include <qregexp.h>
-#include <qlayout.h>
-#include <qstatusbar.h>
-#include <qprinter.h>
-#include <qpicture.h>
-#include <qpainter.h>
-#include <qfiledialog.h>
-#include <qimagewriter.h>
-#include <qprintdialog.h>
-#include <qfileinfo.h>
-#include <qpushbutton.h>
 #include <qwt_counter.h>
 #include <qwt_picker_machine.h>
 #include <qwt_plot_zoomer.h>
@@ -22,8 +24,8 @@
 #include <qwt_plot_renderer.h>
 #include <qwt_text.h>
 #include <qwt_math.h>
-#include <QRectF>
-#include "plotdialog.h"
+
+#include "plotwidget.h"
 
 class Zoomer: public QwtPlotZoomer
 {
@@ -44,7 +46,7 @@ public:
     }
 };
 
-PlotDialog::PlotDialog(QWidget *parent) :
+PlotWidget::PlotWidget(QWidget *parent) :
     QWidget(parent)
 {
     signPlot = new Plot(this);
@@ -94,13 +96,13 @@ PlotDialog::PlotDialog(QWidget *parent) :
 
 }
 
-PlotDialog::~PlotDialog()
+PlotWidget::~PlotWidget()
 {
     delete signPlot;
 }
 
 
-void PlotDialog::setParams(double *x, int NUM, QString xTitle, QString yTitle){
+void PlotWidget::setParams(double *x, int NUM, QString xTitle, QString yTitle){
     t= x;
     N = NUM;
 
@@ -109,11 +111,11 @@ void PlotDialog::setParams(double *x, int NUM, QString xTitle, QString yTitle){
 
 }
 
-void PlotDialog::addCurve(const QString &title, double *window){
+void PlotWidget::addCurve(const QString &title, double *window){
     addCurve(title, window, SIGN);
 }
 
-void PlotDialog::addCurve(const QString &title, double *window, CurveType type){
+void PlotWidget::addCurve(const QString &title, double *window, CurveType type){
     QwtPlotCurve *c = new QwtPlotCurve(title);
     QPen sPen;
     if(curve_count<=14){
@@ -157,7 +159,7 @@ void PlotDialog::addCurve(const QString &title, double *window, CurveType type){
     d_zoomer->setZoomBase();
 }
 
-void PlotDialog::resetCurves(){
+void PlotWidget::resetCurves(){
     curve_count = 0;
     d_zoomer->zoom(0);
     d_zoomer->setZoomBase();
@@ -197,7 +199,7 @@ void PlotDialog::print()
 }
 #endif
 
-void PlotDialog::exportDocument()
+void PlotWidget::exportDocument()
 {
 #ifndef QT_NO_PRINTER
     QString fileName = "graph.pdf";
@@ -249,7 +251,7 @@ void PlotDialog::exportDocument()
     }
 }
 
-void PlotDialog::enableZoomMode(bool on)
+void PlotWidget::enableZoomMode(bool on)
 {
     d_panner->setEnabled(on);
 
@@ -259,12 +261,12 @@ void PlotDialog::enableZoomMode(bool on)
     d_picker->setEnabled(!on);
 }
 
-void PlotDialog::setTitle(QString title)
+void PlotWidget::setTitle(QString title)
 {
     signPlot->setTitle(title);
 }
 
-void PlotDialog::changeLineOrLog(bool log)
+void PlotWidget::changeLineOrLog(bool log)
 {
     d_zoomer->zoom(0);
     signPlot->changeLineOrLog(log);

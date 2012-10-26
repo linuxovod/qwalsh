@@ -5,7 +5,6 @@ TARGET = QWalsh
 TEMPLATE = app
 include(lib/qwt.prf)
 SOURCES += src/main.cpp \
-    src/ui/plotdialog.cpp \
     src/ui/plot.cpp \
     src/logic/calculation.cpp \
     src/logic/signal.cpp \
@@ -15,9 +14,9 @@ SOURCES += src/main.cpp \
     src/ui/startwindow.cpp \
     src/logic/experiment.cpp \
     src/logic/experimentparams.cpp \
-    src/logic/window.cpp
+    src/logic/window.cpp \
+    src/ui/plotwidget.cpp
 HEADERS += \
-    src/ui/plotdialog.h \
     src/ui/plot.h \
     src/logic/calculation.h \
     src/logic/signal.h \
@@ -27,7 +26,8 @@ HEADERS += \
     src/ui/startwindow.h \
     src/logic/experiment.h \
     src/logic/experimentparams.h \
-    src/logic/window.h
+    src/logic/window.h \
+    src/ui/plotwidget.h
 FORMS += \
     src/ui/plotwindow.ui \
     src/ui/signalparamsdialog.ui \

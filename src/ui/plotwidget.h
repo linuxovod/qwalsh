@@ -17,12 +17,12 @@ enum CurveType {
     SPEC
 };
 
-class PlotDialog : public QWidget
+class PlotWidget : public QWidget
 {
 Q_OBJECT
 public:
-    PlotDialog(QWidget *parent = 0);
-    ~PlotDialog();
+    PlotWidget(QWidget *parent = 0);
+    ~PlotWidget();
     void setParams(double *t, int N, QString xTitle, QString yTitle);
     void addCurve(const QString &title, double *window);
     void addCurve(const QString &title, double *window, CurveType type);

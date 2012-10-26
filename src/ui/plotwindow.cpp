@@ -7,13 +7,13 @@ PlotWindow::PlotWindow(QWidget *parent) :
     ui(new Ui::PlotWindow)
 {
     ui->setupUi(this);
-    plot = new  PlotDialog();
+    plot = new  PlotWidget();
 
     QLayout *layout = ui->plotLayout->layout();
     layout->addWidget(plot);
     paramsDialog = new SignalParamsDialog(this);
     QObject::connect(paramsDialog, SIGNAL(accepted()), this, SLOT(paramsChanged()));
-     QObject::connect(ui->exportButton, SIGNAL(clicked()), plot, SLOT(exportDocument()));
+    QObject::connect(ui->exportButton, SIGNAL(clicked()), plot, SLOT(exportDocument()));
     QObject::connect(ui->zoomPushButton, SIGNAL(toggled(bool)), plot, SLOT(enableZoomMode(bool)));
     on_logCheckBox_stateChanged(ui->logCheckBox->checkState());
 }
@@ -45,7 +45,7 @@ void PlotWindow::setType(ExperimentType type)
     case TRANSFORM_AND_SIGNAL:
         ui->logCheckBox->setChecked(false);
         plot->setTitle(QObject::trUtf8("Спектр Уолша"));
-        plot2 = new PlotDialog();
+        plot2 = new PlotWidget();
         plot2->setTitle(QObject::trUtf8("Сигнал на начальной частоте"));
         QLayout *layout = ui->plotLayout->layout();
         layout->addWidget(plot2);

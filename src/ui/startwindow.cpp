@@ -19,73 +19,43 @@ StartWindow::~StartWindow()
 //Обработка нажатия кнопки выбора эксперимента по оценке СКЗ
 void StartWindow::on_rmsButton_clicked()
 {
-    if(plotWindow == NULL){
-       plotWindow = new PlotWindow(this);
-    }
-
-    plotWindow->setType(RMS);
-
-    this->hide();
-    plotWindow->showMaximized();
+    showPlotWindow(RMS);
 }
 
 //Обработка нажатия кнопки выбора эксперимента по оценке СКЗ
 // в зависимости от начальной фазы.
 void StartWindow::on_rmsPhaseButton_clicked()
 {
-    if(plotWindow == NULL){
-       plotWindow = new PlotWindow(this);
-    }
-
-    plotWindow->setType(RMS_PHASE_LIST);
-
-    this->hide();
-    plotWindow->showMaximized();
+    showPlotWindow(RMS_PHASE_LIST);
 }
 
 void StartWindow::on_firstHarmonicButton_clicked()
 {
-    if(plotWindow == NULL){
-       plotWindow = new PlotWindow(this);
-    }
-
-    plotWindow->setType(FIRST_HARMONIC_RMS);
-
-    this->hide();
-    plotWindow->showMaximized();
+    showPlotWindow(FIRST_HARMONIC_RMS);
 }
 
 void StartWindow::on_signalButton_clicked()
 {
-    if(plotWindow == NULL){
-       plotWindow = new PlotWindow(this);
-    }
-
-    plotWindow->setType(TRANSFORM_AND_SIGNAL);
-
-    this->hide();
-    plotWindow->showMaximized();
+   showPlotWindow(TRANSFORM_AND_SIGNAL);
 }
 
 void StartWindow::on_frequencyDetectionButton_clicked()
 {
-    if(plotWindow == NULL){
-       plotWindow = new PlotWindow(this);
-    }
-
-    plotWindow->setType(FREQUENCE_DETECTION);
-
-    this->hide();
-    plotWindow->showMaximized();
+    showPlotWindow(FREQUENCE_DETECTION);
 }
 
 void StartWindow::on_doubleHarmonicButton_clicked()
+{
+    showPlotWindow(DOUBLE_HARMONIC);
+}
+
+void StartWindow::showPlotWindow(ExperimentType type)
 {
     if(plotWindow == NULL){
        plotWindow = new PlotWindow(this);
     }
 
-    plotWindow->setType(DOUBLE_HARMONIC);
+    plotWindow->setType(type);
 
     this->hide();
     plotWindow->showMaximized();

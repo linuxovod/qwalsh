@@ -2,6 +2,7 @@
 #define STARTWINDOW_H
 
 #include <QMainWindow>
+
 #include "plotwindow.h"
 
 class PlotWindow;
@@ -28,6 +29,7 @@ private slots:
     void on_signalButton_clicked();
     void on_frequencyDetectionButton_clicked();
     void on_doubleHarmonicButton_clicked();
+    void showPlotWindow(ExperimentType type);
 };
 
 #endif // STARTWINDOW_H
